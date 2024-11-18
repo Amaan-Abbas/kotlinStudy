@@ -16,3 +16,12 @@ fun main() {
 
     println(result)
 }
+
+//NOTE: Can use  range into the When as well.
+/*
+when(number) {
+    1 -> "It is 1"
+    2 -> "It is 2"
+    in 2..5 -> "Greater than 2 and less than 6"
+    6 -> "It is 6"
+ */
