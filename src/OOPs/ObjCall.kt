@@ -3,7 +3,7 @@ package OOPs
 import java.util.Scanner
 
 open class Parent(private val name: String) {
-    fun admissionStudent() {
+    protected fun admissionStudent() {
         var num = 0
         for (i in 1..10) {
             if (i%2 == 0) {
@@ -26,6 +26,7 @@ class ObjCall(name: String): Parent(name) {
         }
 
     private fun sum() {
+        admissionStudent()
         println("the number value of the number is: $number")
     }
     override fun display() {
@@ -43,5 +44,4 @@ fun main() {
     val obj = ObjCall(name = name)
 
     obj.display()
-    obj.admissionStudent()
 }
