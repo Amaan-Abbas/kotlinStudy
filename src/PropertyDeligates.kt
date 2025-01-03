@@ -15,6 +15,10 @@ open class SmartDevice(val name: String, val category: String) {
     open fun turnOff() {
         deviceStatus = "off"
     }
+
+    fun printDeviceInfo() {
+        print("Device name: $name, category: $category, type: $deviceType")
+    }
 }
 
 class SmartTvDevice(deviceName: String, deviceCategory: String) :
@@ -31,9 +35,19 @@ class SmartTvDevice(deviceName: String, deviceCategory: String) :
         println("Speaker volume increased to $speakerVolume.")
     }
 
+    fun decreaseVolume() {
+        speakerVolume--
+        println("Speaker volume decreased to $speakerVolume.")
+    }
+
     fun nextChannel() {
         channelNumber++
         println("Channel number increased to $channelNumber.")
+    }
+
+    fun previousChannel() {
+        channelNumber--
+        println("Channel number decreased to $channelNumber.")
     }
 
     override fun turnOn() {
@@ -60,6 +74,11 @@ class SmartLightDevice(deviceName: String, deviceCategory: String) :
     fun increaseBrightness() {
         brightnessLevel++
         println("Brightness increased to $brightnessLevel.")
+    }
+
+    fun decreaseBrightness() {
+        brightnessLevel--
+        println("Brightness decreased to $brightnessLevel.")
     }
 
     override fun turnOn() {
@@ -95,10 +114,32 @@ class SmartHome(
 
     fun increaseTvVolume() {
         smartTvDevice.increaseSpeakerVolume()
+        smartTvDevice.turnOn()
+    }
+
+    fun decreaseTvVolume() {
+        smartTvDevice.decreaseVolume()
+        smartTvDevice.turnOn()
     }
 
     fun changeTvChannelToNext() {
         smartTvDevice.nextChannel()
+        smartTvDevice.turnOn()
+    }
+
+    fun changeTvChannelToPrevious() {
+        smartTvDevice.previousChannel()
+        smartTvDevice.turnOn()
+    }
+
+    fun printSmartTvInfo() {
+        smartTvDevice.printDeviceInfo()
+        smartTvDevice.turnOn()
+    }
+
+    fun printSmartLightInfo() {
+        smartLightDevice.printDeviceInfo()
+        smartLightDevice.turnOn()
     }
 
     fun turnOnLight() {
@@ -113,6 +154,12 @@ class SmartHome(
 
     fun increaseLightBrightness() {
         smartLightDevice.increaseBrightness()
+        smartTvDevice.turnOn()
+    }
+
+    fun decreaseLightBrightness() {
+        smartLightDevice.decreaseBrightness()
+        smartLightDevice.turnOn()
     }
 
     fun turnOffAllDevices() {
@@ -143,6 +190,15 @@ class RangeRegulator(
 fun main() {
     var smartDevice: SmartDevice = SmartTvDevice("Android TV", "Entertainment")
     smartDevice.turnOn()
+    smartDevice.printDeviceInfo()
+
+    var smartTv: SmartTvDevice = SmartTvDevice("Android TV", "Entertainment")
+
+    var smartLight: SmartLightDevice = SmartLightDevice("Duracell", "Light")
+
+    var smartHome : SmartHome = SmartHome(smartTv, smartLight)
+    smartHome.decreaseLightBrightness()
+    smartHome.changeTvChannelToPrevious()
 
     smartDevice = SmartLightDevice("Google Light", "Utility")
     smartDevice.turnOn()
